@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -15,9 +15,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     @vite(['resources/css/app.css','resources/js/app.js'])
+    <link href="{{ asset('css_user/user_landing_page.css') }}" rel="stylesheet">
+
 </head>
 
-<body class="min-h-screen font-poppins bg-gradient-to-b from-blue-500 to-white">
+<body class="min-h-screen bg-gray-100">
     @yield('main')
 </body>
 

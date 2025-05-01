@@ -82,7 +82,7 @@ class AuthController extends Controller
             'email' => 'required|unique:pengguna|email',
             'nomor_telepon' => 'required|unique:pengguna',
             'nama' => 'required',
-            'password' => 'required',
+            'password' => 'required|confirmed',
             'jenis_kendaraan' => 'required',
             'no_plat' => 'required|unique:pengguna',
             'foto_kendaraan' => 'required|image|file|mimes:jpeg,png,jpg',

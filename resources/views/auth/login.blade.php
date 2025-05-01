@@ -41,8 +41,7 @@
                                 @enderror
                                 <input id="password" class="w-full ml-2 text-base border-none focus:ring-0 md:text-lg"
                                     placeholder="Kata Sandi" type="password" name="password" required />
-                                <i id="togglePassword" class="text-gray-400 cursor-pointer fas fa-eye"
-                                    onclick="togglePassword('password', this)"></i>
+                                <i id="togglePassword" class="text-gray-400 cursor-pointer fas fa-eye" onclick="togglePassword('password', this)"></i>
                             </div>
                         </div>
 
