@@ -22,7 +22,6 @@ Route::get('/', function () {
 });
 
 
-
 //Autentikasi
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('/login-proses', [AuthController::class, 'login_proses'])->name('login_proses');
