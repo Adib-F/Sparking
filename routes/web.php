@@ -14,13 +14,11 @@ use App\Http\Controllers\AdminAnalysisController;
 use App\Http\Controllers\AdminApprovalController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AdminSlotController;
+use App\Http\Controllers\LandingPageController;
 
 
 // landing Page
-Route::get('/', function () {
-    return view('/user/landing_page');
-});
-
+Route::get('/', [LandingPageController::class, 'index'])->name('landing_page');
 
 //Autentikasi
 Route::get('login', [AuthController::class, 'login'])->name('login');
