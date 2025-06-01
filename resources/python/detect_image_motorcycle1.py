@@ -9,7 +9,7 @@ model = YOLO('yolov8n.pt')
 API_URL = "http://127.0.0.1:8000/api/update-slot-status"
 
 # Subzona ID
-SUBZONA_ID = 2
+SUBZONA_ID = 
 
 # Path ke gambar
 image_path = "source/motorcycle1.jpg"

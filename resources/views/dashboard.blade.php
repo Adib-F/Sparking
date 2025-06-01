@@ -58,7 +58,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('analysis') }}"
+            <a href="{{ route('statistik') }}"
                class="group bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 transform translate-y-10 opacity-0 transition-all duration-500 ease-out delay-150"
                id="analysis-card">
                 <div class="p-6 flex flex-col items-center text-center">

@@ -7,7 +7,7 @@ use App\Models\Slot;
 
 class ApiSlotController extends Controller
 {
-    public function updateSlotStatus(Request $request)
+     public function updateSlotStatus(Request $request)
     {
         $data = $request->validate([
             'subzona_id' => 'required|integer',

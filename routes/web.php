@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RealTimeController;
 use App\Http\Controllers\QrCodeController;
-use App\Http\Controllers\AnalysisController;
+use App\Http\Controllers\StatistikController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminUserController;
@@ -16,7 +16,8 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AdminSlotController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OnboardingController;
-
+use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Request;
 
 // landing Page
 Route::get('/', [LandingPageController::class, 'index'])->name('landing_page');
@@ -27,11 +28,14 @@ Route::post('/login-proses', [AuthController::class, 'login_proses'])->name('log
 Route::get('/registrasi', [AuthController::class, 'registrasi'])->name('registrasi');
 Route::post('/registrasi-proses', [AuthController::class, 'registrasi_proses'])->name('registrasi_proses');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->name('verification.verify');
+
+
 
 //Email ubah kata sandi
-Route::get('/reset-password/{token}/{id}', [AuthController::class, 'showResetForm'])->middleware('signed')->name('password.reset');
-Route::post('/send-reset-link', [AuthController::class, 'sendResetLink'])->name('password.email');
-Route::post('/reset-password', [AuthController::class, 'reset'])->name('password.update');
+Route::get('/reset-password/{token}/{id}', [SettingsController::class, 'showResetForm'])->middleware('signed')->name('password.reset');
+Route::post('/send-reset-link', [SettingsController::class, 'sendResetLink'])->name('password.email');
+Route::post('/reset-password', [SettingsController::class, 'reset'])->name('password.update');
 
 // Onboarding
 Route::middleware(['auth'])->group(function () {
@@ -45,18 +49,17 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('role:pengguna')->group(function () {
         //Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        //Fitur Utama
-        Route::get('/real-time', [RealTimeController::class, 'index'])->name('real-time');
-        Route::get('/get-subzonas', [RealTimeController::class, 'getSubzonas']);
 
         //Update Foto Kendaran
-        Route::post('/simpan-kendaraan', [QrCodeController::class, 'storeVehicle'])
-        ->name('vehicle.store');
+        Route::post('/simpan-kendaraan', [QrCodeController::class, 'storeVehicle'])->name('vehicle.store');
         Route::post('/profil/update-foto-kendaraan', [SettingsController::class, 'updateFotoKendaraan'])->name('profil.update.foto.kendaraan');
 
-        Route::get('/real-time/subzona/{subzonaId}', [RealTimeController::class, 'getSubzonaDetails'])->name('realTime.subzonaDetails');
+        //real rime
+        Route::get('/real-time', [RealTimeController::class, 'index'])->name('real-time');
+
         //analysis
-        Route::get('/analysis', [AnalysisController::class, 'index'])->name('analysis');
+        Route::get('/statistik', [StatistikController::class, 'index'])->name('statistik');
+
         //ubah kata sandi
         Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
         Route::post('/change-password', [SettingsController::class, 'changePassword'])->name('change.password');

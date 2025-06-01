@@ -11,46 +11,52 @@ class RealTimeController extends Controller
 {
     public function index(Request $request)
     {
-        // Ambil semua zona dengan subzona dan semua slot (tanpa filter 'tersedia')
+        // Ambil semua zona dengan subzona dan semua slot
         $zonas = Zona::with(['subzonas.slots'])->get();
 
-        // Tambahkan properti available dan total ke setiap zona
+        // Tambahkan properti available dan total slot ke setiap zona
         $zonas->each(function ($zona) {
             $zona->total = $zona->subzonas->sum(function ($subzona) {
                 return $subzona->slots->count();
             });
             $zona->available = $zona->subzonas->sum(function ($subzona) {
-                return $subzona->slots->where('keterangan', 'tersedia')->count();
+                return $subzona->slots->where('keterangan', 'Tersedia')->count();
             });
         });
 
         // Ambil zona yang dipilih dari request atau default ke zona pertama
-        $selectedZonaId = $request->has('zona') ? $request->zona : ($zonas->first() ? $zonas->first()->id : null);
+        $selectedZonaId = $request->input('zona'); // Tidak default ke zona pertama
         $selectedZona = $selectedZonaId ? Zona::with(['subzonas.slots'])->find($selectedZonaId) : null;
-
-        // Ambil subzona untuk zona yang dipilih
         $subzonas = $selectedZona ? $selectedZona->subzonas : collect([]);
-        $selectedSubzonaId = $request->has('subzona') ? $request->subzona : null;
+
+        // Tambahkan properti total_slots ke setiap subzona
+        $subzonas->each(function ($subzona) {
+            $subzona->total_slots = $subzona->slots->count();
+        });
+
+        // Ambil subzona yang dipilih dari request
+        $selectedSubzonaId = $request->input('subzona', null);
 
         // Hitung slot berdasarkan status untuk subzona yang dipilih
         $slotStats = [
+            'total' => 0,
             'tersedia' => 0,
             'terisi' => 0,
             'diperbaiki' => 0,
         ];
         if ($selectedSubzonaId) {
             $slotStats = [
-                'tersedia' => Slot::where('subzona_id', $selectedSubzonaId)->where('keterangan', 'tersedia')->count(),
-                'terisi' => Slot::where('subzona_id', $selectedSubzonaId)->where('keterangan', 'terisi')->count(),
-                'diperbaiki' => Slot::where('subzona_id', $selectedSubzonaId)->where('keterangan', 'perbaikan')->count(),
+                'total' => Slot::where('subzona_id', $selectedSubzonaId)->count(),
+                'tersedia' => Slot::where('subzona_id', $selectedSubzonaId)->where('keterangan', 'Tersedia')->count(),
+                'terisi' => Slot::where('subzona_id', $selectedSubzonaId)->where('keterangan', 'Terisi')->count(),
+                'diperbaiki' => Slot::where('subzona_id', $selectedSubzonaId)->where('keterangan', 'Perbaikan')->count(),
             ];
         }
 
-        // Hitung total untuk Status Real Time
+
+        // Hitung total zona, subzona, dan slot untuk status real-time
         $totalZona = $zonas->count();
-        $totalSubzona = $zonas->sum(function ($zona) {
-            return $zona->subzonas->count();
-        });
+        $totalSubzona = $zonas->sum(fn($zona) => $zona->subzonas->count());
         $totalSlot = Slot::count();
 
         return view('realTime', [
@@ -67,54 +73,4 @@ class RealTimeController extends Controller
         ]);
     }
 
-    public function getSubzonas(Request $request)
-    {
-        $request->validate([
-            'zona_id' => 'required|exists:zonas,id'
-        ]);
-
-        $subzonas = Subzona::where('zona_id', $request->zona_id)
-            ->with([
-                'slots' => function ($query) {
-                    $query->select('id', 'subzona_id', 'nomor_slot', 'keterangan', 'fotozona');
-                }
-            ])
-            ->get(['id', 'zona_id', 'nama']);
-
-        return response()->json([
-            'success' => true,
-            'data' => $subzonas
-        ]);
-    }
-
-    public function getSubzonaDetails($subzonaId)
-    {
-        $subzona = Subzona::with([
-            'slots' => function ($query) {
-                $query->select('id', 'subzona_id', 'nomor_slot', 'keterangan')
-                    ->orderBy('nomor_slot');
-            }
-        ])->select('id', 'zona_id', 'nama_subzona', 'foto')
-            ->findOrFail($subzonaId);
-
-        $slotStats = [
-            'Tersedia' => $subzona->slots->where('keterangan', 'Tersedia')->count(),
-            'Kosong' => $subzona->slots->where('keterangan', 'Kosong')->count(),
-            'Terisi' => $subzona->slots->where('keterangan', 'Terisi')->count(),
-            'Perbaikan' => $subzona->slots->where('keterangan', 'Perbaikan')->count(),
-        ];
-
-        return response()->json([
-            'nama_subzona' => $subzona->nama_subzona,
-            'foto' => $subzona->foto ? asset('storage/' . $subzona->foto) : asset('images/default-subzona.jpg'),
-            'slots' => $subzona->slots->map(function ($slot) {
-                return [
-                    'id' => $slot->id,
-                    'nomor_slot' => $slot->nomor_slot,
-                    'keterangan' => $slot->keterangan
-                ];
-            }),
-            'slotStats' => $slotStats
-        ]);
-    }
 }
