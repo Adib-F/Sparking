@@ -1,19 +1,19 @@
 <!-- Navbar -->
-<nav class="bg-biru_tua shadow-lg font-poppins sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+<nav class="sticky top-0 z-50 shadow-lg bg-biru_tua font-poppins">
+    <div class="flex items-center justify-between px-4 py-4 mx-auto max-w-7xl">
         <!--logo dan nama-->
-        <div class="flex text-white items-center">
-            <img src="{{ asset('images/LogoParkwell.png') }}" alt="Logo" class="w-12 h-12 mr-3">
-            <h1 class="text-2xl font-bold">SPARKING</h1>
+        <div class="flex items-center text-white">
+            <img src="{{ asset('images/icon.png') }}" alt="Logo" class="w-12 h-12">
+            <h1 class="pt-1 text-2xl font-bold ">PARKING</h1>
         </div>
 
 
         @guest
         <!-- Menu untuk pengguna yang belum login (landing page) -->
             <div>
-                <a href="#tentang" class="text-white hover:text-blue-500 px-4">Tentang</a>
-                <a href="#keunggulan" class="text-white hover:text-blue-500 px-4">Keunggulan</a>
-                <a href="javascript:void(0);" onclick="openModal()" class="bg-biru_muda hover:bg-white hover:text-biru_muda text-white font-semibold px-6 py-2 rounded-full transition duration-300 shadow">Login</a>
+                <a href="#tentang" class="px-4 text-white hover:text-blue-500">Tentang</a>
+                <a href="#keunggulan" class="px-4 text-white hover:text-blue-500">Keunggulan</a>
+                <a href="javascript:void(0);" onclick="openModal()" class="px-6 py-2 font-semibold text-white transition duration-300 rounded-full shadow bg-biru_muda hover:bg-white hover:text-biru_muda">Login</a>
             </div>
         @endguest
 

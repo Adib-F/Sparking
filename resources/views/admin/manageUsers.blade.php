@@ -148,7 +148,7 @@
                                     data-modal-toggle="lihat-kendaraan1-{{ $pengguna->id_pengguna }}"
                                     class="w-full bg-white hover:underline text-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-center">
                                     <i class="w-4 h-4 mt-1 me-2 fas fa-car "></i>
-                                    Lihat Kendaraan 
+                                    Lihat Kendaraan
                                 </button>
                                 <!-- <button type="button" data-modal-target="lihat-kendaraan2"
                                     data-modal-toggle="lihat-kendaraan2"
@@ -169,7 +169,7 @@
                                     </div>
                                     <div>
                                         <p class="text-sm text-gray-500">NIM/NIK/NIDN/NIP</p>
-                                        <p class="font-medium text-gray-800">{{ $pengguna->identitas }}</p>
+                                        <p class="font-medium text-gray-800">-</p>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
@@ -200,7 +200,7 @@
                                         <p class="font-medium text-gray-800">{{ $pengguna->nama }}</p>
                                     </div>
                                 </div>
-                                <div class="flex items-center space-x-2">
+                                {{-- <div class="flex items-center space-x-2">
                                     <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-50">
                                         <i class="w-4 h-4 text-gray-700 fas fa-phone"></i>
                                     </div>
@@ -208,7 +208,7 @@
                                         <p class="text-sm text-gray-500">Nomor Telepon</p>
                                         <p class="font-medium text-gray-800">{{ $pengguna->nomor_telepon }}</p>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="flex items-center space-x-2">
                                     <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-50">

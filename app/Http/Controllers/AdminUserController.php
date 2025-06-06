@@ -9,7 +9,7 @@ class AdminUserController extends Controller
 {
     public function index()
     {
-        $users = User::where('status', 'aktif')->paginate(5);
+        $users = User::where('status', 'aktif')->paginate(10);
 
         return view('admin.manageUsers', [
             "title" => "ManageUsers",
