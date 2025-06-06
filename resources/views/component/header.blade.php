@@ -1,37 +1,38 @@
 <!-- Navbar -->
-<nav class="bg-biru_tua shadow-lg font-poppins sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+<nav class="sticky top-0 z-50 shadow-lg bg-biru_tua font-poppins">
+    <div class="flex items-center justify-between px-4 py-4 mx-auto max-w-7xl">
         <!-- Logo -->
-        <div class="flex items-center space-x-2">
-            <img src="images/icon.png" alt="Logo" class="w-10 h-10 border-2 border-white rounded-full object-cover" />
-            <div class="text-xl font-bold text-white">SIPPP</div>
-        </div>
+        <img src="images/icon.png"
+            class="object-cover w-12 h-12" />
+
+
 
         <!-- Hamburger menu button (mobile) -->
         <div class="md:hidden">
             <button id="menu-button" class="text-white focus:outline-none" onclick="toggleMenu()">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M4 6h16M4 12h16M4 18h16" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
         </div>
 
         <!-- Menu Links (desktop) -->
         <div class="hidden md:flex md:items-center md:space-x-6">
-            <a href="#tentang" class="text-white hover:text-blue-400 transition">Tentang</a>
-            <a href="#keunggulan" class="text-white hover:text-blue-400 transition">Keunggulan</a>
-            <a href="javascript:void(0);" onclick="openModal()" class="bg-biru_muda hover:bg-white hover:text-biru_muda text-white font-semibold px-6 py-2 rounded-full transition duration-300 shadow">
+            <a href="#tentang" class="text-white transition hover:text-blue-400">Tentang</a>
+            <a href="#keunggulan" class="text-white transition hover:text-blue-400">Keunggulan</a>
+            <a href="javascript:void(0);" onclick="openModal()"
+                class="px-6 py-2 font-semibold text-white transition duration-300 rounded-full shadow bg-biru_muda hover:bg-white hover:text-biru_muda">
                 Login
             </a>
         </div>
     </div>
 
     <!-- Mobile Menu (hidden by default) -->
-    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4">
-        <a href="#tentang" class="block text-white py-2 hover:text-blue-400">Tentang</a>
-        <a href="#keunggulan" class="block text-white py-2 hover:text-blue-400">Keunggulan</a>
-        <a href="javascript:void(0);" onclick="openModal()" class="block text-center mt-2 bg-biru_muda hover:bg-white hover:text-biru_muda text-white font-semibold px-6 py-2 rounded-full transition duration-300 shadow">
+    <div id="mobile-menu" class="hidden px-4 pb-4 md:hidden">
+        <a href="#tentang" class="block py-2 text-white hover:text-blue-400">Tentang</a>
+        <a href="#keunggulan" class="block py-2 text-white hover:text-blue-400">Keunggulan</a>
+        <a href="javascript:void(0);" onclick="openModal()"
+            class="block px-6 py-2 mt-2 font-semibold text-center text-white transition duration-300 rounded-full shadow bg-biru_muda hover:bg-white hover:text-biru_muda">
             Login
         </a>
     </div>
