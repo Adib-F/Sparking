@@ -14,19 +14,19 @@ class AdminSlotController extends Controller
     {
         // Ambil semua zona
         $zonas = Zona::all();
-    
+
         // Zona yang dipilih, default ke zona pertama jika null
         $selectedZona = $zonaId ? Zona::findOrFail($zonaId) : $zonas->first();
-        
+
         // Subzona berdasarkan zona yang dipilih
         $subzonas = $selectedZona ? Subzona::where('zona_id', $selectedZona->id)->get() : collect();
-        
+
         // Subzona pertama sebagai default
         $selectedSubzona = $subzonas->first();
-        
+
         // Slot berdasarkan subzona yang dipilih
         $slots = $selectedSubzona ? Slot::where('subzona_id', $selectedSubzona->id)->get() : collect();
-    
+
         return view('admin.manageSlot', [
             'zonas' => $zonas,
             'subzonas' => $subzonas,
@@ -41,16 +41,16 @@ class AdminSlotController extends Controller
     {
         // Ambil subzona yang dipilih
         $subzona = Subzona::findOrFail($subzonaId);
-        
+
         // Ambil zona dari subzona
         $zona = $subzona->zona;
-        
+
         // Ambil semua zona untuk dropdown
         $zonas = Zona::all();
-        
+
         // Ambil semua subzona untuk zona yang dipilih
         $subzonas = Subzona::where('zona_id', $zona->id)->get();
-        
+
         // Ambil slot untuk subzona yang dipilih
         $slots = Slot::where('subzona_id', $subzonaId)->get();
 
@@ -74,12 +74,13 @@ class AdminSlotController extends Controller
                 'required',
                 'integer',
                 'min:1',
-                // Unique validation for slot number within the specific subzona
                 Rule::unique('slot', 'nomor_slot')->where(function ($query) use ($request) {
                     return $query->where('subzona_id', $request->subzona_id);
                 })
             ],
-            'keterangan' => 'required|in:Tersedia,Terisi,Perbaikan'
+
+            'keterangan' => 'required|in:Tersedia,Terisi,Perbaikan',
+
         ], [
             // Custom error messages
             'subzona_id.required' => 'Sub-zona wajib diisi.',
@@ -91,14 +92,13 @@ class AdminSlotController extends Controller
             'keterangan.required' => 'Keterangan harus dipilih.',
             'keterangan.in' => 'Keterangan tidak valid.'
         ]);
-    
+
         try {
             // Create the new slot
             $slot = Slot::create($validatedData);
-    
-            // Redirect with success message
-            return redirect()->route('admin-slot', ['subzona' => $request->subzona_id])
-                ->with('success', 'Slot berhasil ditambahkan');
+
+            return redirect()->back()->with('success', 'Slot berhasil ditambahkan');
+
         } catch (\Exception $e) {
             // Handle any unexpected errors
             return redirect()->back()
@@ -121,7 +121,15 @@ class AdminSlotController extends Controller
                     return $query->where('subzona_id', $request->subzona_id);
                 })
             ],
-            'keterangan' => 'required|in:Tersedia,Terisi,Perbaikan'
+            'keterangan' => 'required|in:Tersedia,Terisi,Perbaikan',
+            'x1' => 'required|integer|min:0',
+            'y1' => 'required|integer|min:0',
+            'x2' => 'required|integer|min:0',
+            'y2' => 'required|integer|min:0',
+            'x3' => 'required|integer|min:0',
+            'y3' => 'required|integer|min:0',
+            'x4' => 'required|integer|min:0',
+            'y4' => 'required|integer|min:0',
         ], [
             'nomor_slot.required' => 'Nomor slot harus diisi.',
             'nomor_slot.integer' => 'Nomor slot harus berupa angka.',
@@ -143,4 +151,4 @@ class AdminSlotController extends Controller
 
         return redirect()->route('admin-slot')->with('success', 'Slot berhasil dihapus');
     }
-}   
+}
