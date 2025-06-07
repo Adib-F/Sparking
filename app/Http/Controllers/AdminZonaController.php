@@ -97,12 +97,14 @@ class AdminZonaController extends Controller
         $validated = $request->validate([
             'zona_id' => 'required|exists:zona,id',
             'nama_subzona' => 'required|unique:subzona,nama_subzona',
+            'camera_id' => 'required|integer',
             'foto' => 'required|image|max:5000'
         ], [
             'zona_id.required' => 'Nama Zona wajib diisi.',
             'keterangan.required' => 'Keterangan Zona wajib diisi.',
             'nama_subzona.unique' => 'Nama Subzona telah terdaftar',
             'nama_subzona.required' => 'Nama Subzona wajib diisi',
+            'camera_id.integer' => 'kamera id harus berupa angka',
             'foto.required' => 'Foto area Sub-Zona wajib diisi.',
             'foto.image' => 'file yang disubmit harus berupa gambar.',
             'foto.max' => 'Ukuran gambar tidak boleh lebih dari 5MB.'
@@ -122,11 +124,14 @@ class AdminZonaController extends Controller
         $subzona = Subzona::findOrFail($id);
 
         $validated = $request->validate([
-            'foto' => 'required|image|max:5000',
+            'foto' => 'image|max:5000',
+            'camera_id' => 'required|integer'
         ], [
             'foto.image' => 'File yang disubmit harus berupa gambar.',
             'foto.max' => 'Ukuran gambar tidak boleh lebih dari 5MB.',
+            'camera_id.integer' => 'Kamera ID harus berupa angka'
         ]);
+
 
         if ($request->hasFile('foto')) {
             if ($subzona->foto) {
@@ -136,7 +141,7 @@ class AdminZonaController extends Controller
         }
 
         $subzona->update($validated);
-        return redirect()->back()->with('succes', 'Foto Subzona berhasil diupdate.');
+        return redirect()->back()->with('success', 'Subzona berhasil diupdate.');
     }
 
 

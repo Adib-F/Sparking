@@ -300,8 +300,16 @@
                             </div>
                             <div class="col-span-2">
                                 @if ($zona->fotozona)
+                                    @php
+                                        $fotoPath = $zona->fotozona;
+                                        if (Str::startsWith($fotoPath, 'datafoto')) {
+                                            $fotoUrl = asset('storage/' . $fotoPath);
+                                        } else {
+                                            $fotoUrl = asset(ltrim($fotoPath, '/'));
+                                        }
+                                    @endphp
                                     <div class="mb-2">
-                                        <img src="{{ asset('storage/' . $zona->fotozona) }}" alt="Foto Zona"
+                                        <img src="{{ $fotoUrl }}" alt="Foto Zona"
                                             class="object-cover w-full h-32 rounded-lg">
                                     </div>
                                 @endif
@@ -380,6 +388,14 @@
                                 placeholder="Masukkan Nama Subzona" required>
                         </div>
                         <div class="col-span-2">
+                            <label for="camera_id"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">kamera_id
+                            </label>
+                            <input type="text" name="camera_id" id="camera_id" value="{{ old('camera_id') }}"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="Masukkan Kamera Id" required>
+                        </div>
+                        <div class="col-span-2">
                             <div id="image-previewsubzona" class="hidden mb-2">
                                 <img src="" alt="Preview Foto" class="object-cover w-full h-32 rounded-lg">
                             </div>
@@ -456,9 +472,24 @@
                                     class="bg-gray-200 border border-gray-300 text-gray-500 text-sm rounded-lg block w-full p-2.5">
                             </div>
                             <div class="col-span-2">
+                                <label for="camera_id"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kamera Id
+                                </label>
+                                <input type="text" value="{{ $subzona->camera_id }}" name="camera_id"
+                                    class="border border-gray-300 text-gray-500 text-sm rounded-lg block w-full p-2.5">
+                            </div>
+                            <div class="col-span-2">
                                 @if ($subzona->foto)
+                                    @php
+                                        $fotoPath = $subzona->foto;
+                                        if (Str::startsWith($fotoPath, 'datafoto')) {
+                                            $fotoUrl = asset('storage/' . $fotoPath);
+                                        } else {
+                                            $fotoUrl = asset(ltrim($fotoPath, '/'));
+                                        }
+                                    @endphp
                                     <div class="mb-2">
-                                        <img src="{{ asset('storage/' . $subzona->foto) }}" alt="Foto Subzona"
+                                        <img src="{{ $fotoUrl }}" alt="Foto Subzona"
                                             class="object-cover w-full h-32 rounded-lg">
                                     </div>
                                 @endif
