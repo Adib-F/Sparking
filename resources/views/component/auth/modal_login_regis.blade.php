@@ -53,7 +53,7 @@
                                 <input type="password" placeholder="Password" name="password" value="{{old('pasword')}}" class="w-full px-3 py-2 pl-10 text-white border shadow-md bg-white/20 backdrop-blur-md backdrop-saturate-200 border-white/30 placeholder-white/70 rounded-2xl focus:outline-none focus:ring-1 focus:ring-white focus:border-white/50" />
                             </div>
                             <div class="flex flex-col items-center mt-6 mb-2 space-y-2">
-                                <button type="submit" class="w-4/5 px-4 py-2 font-semibold tracking-wide text-black transition-all duration-300 bg-white border border-white shadow-md rounded-2xl hover:bg-opacity-90 hover:shadow-lg">
+                                <button name="login_path" type="submit" class="w-4/5 px-4 py-2 font-semibold tracking-wide text-black transition-all duration-300 bg-white border border-white shadow-md rounded-2xl hover:bg-opacity-90 hover:shadow-lg">
                                     Login
                                 </button>
                             </div>
