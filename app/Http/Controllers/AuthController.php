@@ -11,16 +11,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function login()
-    {
-        return view(
-            'auth.login',
-            [
-                'title' => 'login'
-            ]
-        );
-    }
-
     public function login_proses(Request $request)
     {
         $request->validate([
@@ -65,13 +55,6 @@ class AuthController extends Controller
         }
     }
 
-    public function registrasi()
-    {
-        return view('auth.registrasi', [
-            'title' => 'registrasi'
-        ]);
-    }
-
     public function registrasi_proses(Request $request)
     {
         try {
@@ -110,7 +93,7 @@ class AuthController extends Controller
             $user->notify(new VerifikasiEmail());
 
             return redirect()
-                ->route('landing_page')
+                ->route('login')
                 ->with('success', 'Pendaftaran berhasil. Silakan periksa email Anda untuk verifikasi.')
                 ->with('showVerificationModal', true);
         } else {
@@ -126,11 +109,11 @@ class AuthController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if (! hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
+        if (!hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
             abort(403, 'Invalid verification link');
         }
 
-        if (! $user->hasVerifiedEmail()) {
+        if (!$user->hasVerifiedEmail()) {
             $user->markEmailAsVerified();
             $user->status = 'aktif';
             $user->save();
@@ -138,7 +121,7 @@ class AuthController extends Controller
             event(new Verified($user));
         }
 
-        return redirect()->route('landing_page')->with('success', 'Akun anda sudah diverifikasi dan siap digunakan!');
+        return redirect()->route('login')->with('success', 'Akun anda sudah diverifikasi dan siap digunakan!');
     }
 
 
@@ -148,7 +131,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-        return redirect()->route('landing_page')->with('succes', 'Logout Berhasil');
+        return redirect()->route('login')->with('succes', 'Logout Berhasil');
     }
 
 
