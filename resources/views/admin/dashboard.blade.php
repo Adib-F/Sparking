@@ -7,7 +7,7 @@
     </div>
 
     <!-- Card Grid -->
-    <div class="grid grid-cols-1 p-12 mx-6 my-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 gap-x-10">
+    <div class="grid justify-center grid-cols-1 p-12 mx-6 my-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 gap-x-10">
 
         <!-- Card 1 -->
         <div
@@ -33,35 +33,6 @@
                                 {{ $data['total_user'] }}
                             </p>
                             <h4 class="text-xl text-center text-black">Pengguna</h4>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        {{-- Card 2 --}}
-        <div
-            class="flex flex-col max-w-sm h-auto bg-[#95AFE5] border border-gray-200 shadow-md p-7 md:rounded-2xl hover:bg-blue-400">
-            <a href="{{ route('admin-approval') }}" class="block">
-                <div class="flex items-center mb-1 pl-7">
-                    <div class="icon">
-                        <svg class="size-16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                            <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                            <path
-                                d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                        </svg>
-                    </div>
-                    <div class="flex flex-col flex-1">
-                        <div class="flex flex-col">
-                            <p data-hs-toggle-count='{
-                            "target": "#toggle-count",
-                            "min": 0,
-                            "max": 150
-                            }'
-                                class="text-4xl font-semibold text-center text-gray-800">
-                                {{ $data['total_persetujuan'] }}
-                            </p>
-                            <h4 class="text-xl text-center text-black">Persetujuan</h4>
                         </div>
                     </div>
                 </div>
@@ -191,3 +162,4 @@
 
     </div>
 @endsection
+

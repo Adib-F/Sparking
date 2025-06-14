@@ -15,7 +15,7 @@
                 </a>
             </div>
 
-            <div class="relative w-full h-64 overflow-hidden shadow-lg cursor-pointer rounded-2xl group" onclick="openImageModal(this)">
+            <div id="peta" class="relative w-full h-64 overflow-hidden shadow-lg cursor-pointer rounded-2xl group" onclick="openImageModal(this)">
                 <img
                     src="{{asset('images/peta.png')}}"
                     alt="Parking Area"
@@ -39,7 +39,7 @@
             <!-- Image Modal -->
             <div id="imageModal" class="fixed inset-0 z-50 items-center justify-center hidden p-4 bg-black bg-opacity-90 animate-fadeIn">
                 <div class="relative max-w-6xl w-full max-h-[30vh] mx-auto my-auto">
-                    <button onclick="closeImageModal()"
+                    <button id="close" onclick="closeImageModal()"
                             class="absolute text-3xl text-white transition-transform duration-200 top-2 right-2 hover:text-gray-300 focus:outline-none hover:scale-110"
                             aria-label="Tutup modal">
                         <div class="flex items-center justify-center w-10 h-10 transition-all bg-black bg-opacity-50 rounded-full hover:bg-opacity-75">

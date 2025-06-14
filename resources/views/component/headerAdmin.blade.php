@@ -1,8 +1,8 @@
 <!-- Title -->
 <div class="flex items-center justify-start col-span-2">
-    <img class="w-32 h-32 -mx-4 -my-8" src="{{ asset('images/icon.png')}}" alt="Sippp">
-    <div class="text-lg font-bold md:text-2xl xl:text-3xl">
-        SIPPP
+    <img class="w-16 h-16" src="{{ asset('images/icon.png')}}" alt="Sippp">
+    <div class="pt-2 text-lg font-bold md:text-2xl xl:text-3xl">
+        PARKING
     </div>
 </div>
 
