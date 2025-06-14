@@ -3,8 +3,8 @@
     <div class="flex items-center justify-between px-4 py-4 mx-auto max-w-7xl">
         <!--logo dan nama-->
         <div class="flex items-center text-white">
-            <img src="{{ asset('images/icon.png') }}" alt="Logo" class="w-12 h-12">
-            <h1 class="pt-1 text-2xl font-bold ">PARKING</h1>
+            <img src="{{ asset('images/icon.png') }}" alt="Logo" class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14">
+            <h1 class="pt-1 text-xl font-bold sm:text-xl md:text-2xl lg:text-3xl">PARKING</h1>
         </div>
 
 
@@ -21,7 +21,7 @@
         <div x-data="{ open: false }" class="relative">
             <button @click="open = !open" @click.outside="open = false"
                 class="text-blue-200 transition-colors hover:text-white focus:outline-none">
-                <i class="text-4xl fas fa-user-circle"></i>
+                <i class="text-3xl sm:text-3xl md:text-4xl lg:text-4xl fas fa-user-circle"></i>
             </button>
 
             <!-- Dropdown Menu -->

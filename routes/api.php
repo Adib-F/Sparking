@@ -20,18 +20,6 @@ Route::post('/update-slot', [AdminSlotObstacleController::class, 'updateSlot']);
 
 Route::post('/transaksi', [TransaksiController::class, 'store']);
 
-
-
-
-
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//dari garis itu sampai ke bawah itu uda bisa realtime ke web 
-
-
 //realtime
 Route::get('/get-subzonas/{zonaId}', [ApiRealtimeController::class, 'getSubzonas']);
 Route::get('/subzona/{id}/detail', [ApiRealtimeController::class, 'getDetail']);
