@@ -16,6 +16,7 @@ class Zona extends Model
     {
         return $this->hasMany(Subzona::class, 'zona_id');
     }
+    
 
     public function transaksis()
     {
@@ -36,4 +37,5 @@ class Zona extends Model
     {
         return $query->where('keterangan', 'perbaikan');
     }
+
 }

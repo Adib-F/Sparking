@@ -20,7 +20,6 @@
         </div>
     </section>
 
-
     @include('component.success-error')
     @include('component.lending_page.animasi_tiga_gambar')
     @include('component.lending_page.tentang_kami')
@@ -84,10 +83,6 @@
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // @if(session('success'))
-            //     // Tampilkan alert jika pendaftaran berhasil
-            //     alert("{{ session('success') }}");
-            // @endif
 
             @if(session('showLogin'))
                 // Buka modal login dan geser ke form login

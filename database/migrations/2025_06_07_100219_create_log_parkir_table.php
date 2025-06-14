@@ -11,17 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subzona', function (Blueprint $table) {
+        Schema::create('log_parkir', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('zona_id');
-            $table->string('nama_subzona');
-            $table->string('foto');
+            $table->unsignedBigInteger('subzona_id');
+            $table->string('nomor_slot');
+            $table->timestamp('waktu_mulai')->nullable();
+            $table->timestamp('waktu_selesai')->nullable();
+            $table->integer('durasi'); 
             $table->timestamps();
 
             $table->foreign('zona_id')->references('id')->on('zona')->onDelete('cascade');
-
-            $table->unique(['zona_id', 'nama_subzona']);
+            $table->foreign('subzona_id')->references('id')->on('subzona')->onDelete('cascade');
         });
+
     }
 
     /**
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subzona');
+        Schema::dropIfExists('log_parkir');
     }
 };
