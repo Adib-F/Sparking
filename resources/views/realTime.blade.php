@@ -3,7 +3,7 @@
 @include('component.headerUser')
 
 @section('main')
-<div class="min-h-[calc(100vh-80px)] bg-gradient-to-br from-blue-50 to-gray-100 flex items-center justify-center p-4">
+<div class="min-h-[calc(100vh-80px)] bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
     <div class="w-full max-w-6xl">
         <div class="flex flex-col gap-6 p-6">
 

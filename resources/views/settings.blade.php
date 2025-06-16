@@ -3,7 +3,7 @@
 @include('component/headerUser')
 
 @section('main')
-<div class="min-h-[calc(100vh-80px)] bg-gradient-to-br from-blue-50 to-gray-100 flex items-center justify-center p-4">
+<div class="min-h-[calc(100vh-80px)] bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
     <div class="flex flex-col items-center gap-6 w-full max-w-4xl">
         <div class="w-full flex justify-start">
             <a href="{{ route('dashboard') }}"

@@ -5,11 +5,53 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Slot;
 use App\Models\SubZona;
+use App\Models\Zona;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class ApiRealtimeController extends Controller
 {
+
+    public function getAllSubzonas()
+{
+    $subzonas = SubZona::select('id', 'nama_subzona', 'camera_id')
+        ->whereNotNull('camera_id') 
+        ->get();
+
+    return response()->json($subzonas);
+}
+
+
+
+
+    /**
+     * Polling card zona di component informasi ringkas real time
+     */
+    public function getZonaslot()
+    {
+        $zonas = Zona::with('subzonas.slots')->get();
+
+        $data = $zonas->map(function ($zona) {
+            $allSlots = $zona->subzonas->flatMap(function ($subzona) {
+                return $subzona->slots;
+            });
+
+            $available = $allSlots->where('keterangan', 'Tersedia')->count();
+            $total = $allSlots->count(); // total semua slot tanpa filter
+
+            return [
+                'id' => $zona->id,
+                'nama_zona' => $zona->nama_zona,
+                'tersedia' => $available,
+                'total' => $total,
+            ];
+        });
+
+        return response()->json($data);
+    }
+
+
+
     /**
      * Dropdown select subzona berdasarkan zona_id
      */
@@ -89,8 +131,6 @@ class ApiRealtimeController extends Controller
         }
     }
 
-    // ---------------------- Controller untuk Stream ----------------------
-
     /**
      * Update status slot (Terisi atau Tersedia)
      */
@@ -129,4 +169,17 @@ class ApiRealtimeController extends Controller
 
         return response()->json(['error' => 'Camera ID not found'], 404);
     }
+    
+    public function getCamera($id)
+{
+    $subzona = Subzona::find($id);
+
+    if (!$subzona) {
+        return response()->json(['error' => 'Subzona tidak ditemukan'], 404);
+    }
+
+    return response()->json([
+        'camera_id' => $subzona->camera_id
+    ]);
+}
 }
