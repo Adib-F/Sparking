@@ -36,4 +36,16 @@ RUN chmod -R 775 storage bootstrap/cache
 # Buka port untuk Railway
 EXPOSE 8000
 
-CMD ["sh", "-c", "echo DB_HOST=$DB_HOST && echo DB_PORT=$DB_PORT && until nc -z $DB_HOST $DB_PORT; do echo 'Waiting for MySQL...'; sleep 2; done; php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000"]
+CMD ["sh", "-c", "\
+  echo DB_HOST=$DB_HOST && \
+  echo DB_PORT=$DB_PORT && \
+  echo 'Menunggu koneksi ke MySQL...' && \
+  until nc -z -v -w30 $DB_HOST $DB_PORT; do \
+    echo 'MySQL belum siap...'; \
+    sleep 3; \
+  done; \
+  echo 'MySQL siap! Menjalankan migrasi...'; \
+  php artisan migrate --force; \
+  echo 'Menjalankan Laravel...'; \
+  php artisan serve --host=0.0.0.0 --port=8000 \
+"]
