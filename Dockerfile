@@ -34,7 +34,7 @@ RUN php artisan config:cache && php artisan route:cache && php artisan view:cach
 RUN chmod -R 775 storage bootstrap/cache
 
 # Buka port untuk Railway
-EXPOSE 8000
+EXPOSE 8080
 
 CMD ["sh", "-c", "\
   echo DB_HOST=$DB_HOST && \
@@ -47,5 +47,5 @@ CMD ["sh", "-c", "\
   echo 'MySQL siap! Menjalankan migrasi...'; \
   php artisan migrate --force; \
   echo 'Menjalankan Laravel...'; \
-  php artisan serve --host=0.0.0.0 --port=8000 \
+  php artisan serve --host=0.0.0.0 --port=8080 \
 "]
