@@ -29,8 +29,8 @@ RUN npm install && npm run build
 # Jalankan cache Laravel
 RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
 
-# Jalankan migrate supaya tabel database dibuat
-RUN php artisan migrate --force
+# Jalankan Laravel menggunakan built-in server + migrate saat container dijalankan
+CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000
 
 # Buka port untuk Railway
 EXPOSE 8000
