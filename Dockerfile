@@ -1,7 +1,7 @@
-# Gunakan base image Laravel Sail
+# Gunakan base image dari Laravel Sail (PHP + Composer + Node)
 FROM laravelsail/php83-composer:latest
 
-# Install dependensi sistem
+# Install dependensi tambahan
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -17,23 +17,26 @@ RUN apt-get update && apt-get install -y \
 # Tentukan direktori kerja
 WORKDIR /var/www
 
-# Salin semua file ke dalam container
+# Copy semua file Laravel ke dalam image
 COPY . .
 
-# Install dependency PHP (tanpa dev)
+# Install dependency PHP
 RUN composer install --no-dev --optimize-autoloader
 
-# Jalankan migrasi, cache config
-RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
-
-# Install dependensi front-end & build
+# Install dan build asset frontend
 RUN npm install && npm run build
 
-# Set permission yang benar
-RUN chmod -R 775 storage bootstrap/cache
+# Jalankan cache Laravel
+RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
 
-# Port default Laravel
+# Jalankan migrate supaya tabel database dibuat
+RUN php artisan migrate --force
+
+# Buka port untuk Railway
 EXPOSE 8000
 
-# Jalankan Laravel
-CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=${PORT}"]
+# Jalankan Laravel menggunakan built-in server
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+
+# Set permission folder Laravel
+RUN chmod -R 775 storage bootstrap/cache
