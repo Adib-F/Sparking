@@ -20,7 +20,6 @@ WORKDIR /var/www
 
 # Copy semua file Laravel ke dalam image
 COPY . .
-COPY .env .env
 
 # Install dependency PHP
 RUN composer install --no-dev --optimize-autoloader
