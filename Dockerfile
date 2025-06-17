@@ -28,7 +28,7 @@ RUN composer install --no-dev --optimize-autoloader
 RUN npm install && npm run build
 
 # Jalankan cache Laravel
-RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
+# RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
 
 # Set permission folder Laravel
 RUN chmod -R 775 storage bootstrap/cache
@@ -38,13 +38,16 @@ EXPOSE 8080
 CMD ["sh", "-c", "\
   echo 'Menunggu koneksi ke MySQL di $DB_HOST:$DB_PORT...' && \
   while ! nc -z \"$DB_HOST\" \"$DB_PORT\"; do \
-    echo 'MySQL belum siap, menunggu...' && sleep 10; \
+    echo 'MySQL belum siap, menunggu...' && sleep 5; \
   done && \
-  echo 'MySQL terkoneksi, lanjut migrasi...' && \
+  echo '✅ MySQL terkoneksi, lanjut migrasi...' && \
+  php artisan migrate --force || { echo '❌ Migrasi gagal!'; exit 1; } && \
+  echo '✅ Migrasi selesai, lanjut cache...' && \
   php artisan config:clear && \
   php artisan cache:clear && \
   php artisan config:cache && \
-  php artisan migrate --force && \
-  echo 'Menjalankan Laravel server...' && \
+  php artisan route:cache && \
+  php artisan view:cache && \
+  echo '🚀 Menjalankan Laravel server...' && \
   php artisan serve --host=0.0.0.0 --port=8080 \
 "]
