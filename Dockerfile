@@ -15,20 +15,20 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
 
-# Tentukan direktori kerja
+# Direktori kerja
 WORKDIR /var/www
 
-# Copy semua file Laravel ke dalam image
+# Copy semua file ke dalam container
 COPY . .
 
-# Install dependency PHP
+# Install dependensi PHP
 RUN composer install --no-dev --optimize-autoloader
 
-# Install dan build asset frontend
-RUN npm install && npm run build
+# Install dependensi JS
+RUN npm install
 
-# Jalankan cache Laravel
-# RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
+# Install vite global (optional, hanya jika dibutuhkan oleh sistem build)
+RUN npm install -g vite
 
 # Set permission folder Laravel
 RUN chmod -R 775 storage bootstrap/cache
@@ -48,6 +48,8 @@ CMD ["sh", "-c", "\
   php artisan config:cache && \
   php artisan route:cache && \
   php artisan view:cache && \
+  echo '⚙️ Re-build Vite assets...' && \
+  npm run build && \
   echo '🚀 Menjalankan Laravel server...' && \
   php artisan serve --host=0.0.0.0 --port=8080 \
 "]

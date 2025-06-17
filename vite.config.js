@@ -8,4 +8,11 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    build: {
+        manifest: true,
+        outDir: 'public/build', // hasil build ke sini
+        rollupOptions: {
+            input: 'resources/js/app.js', // atau sesuai entry utama kamu
+        }
+    }
 });
