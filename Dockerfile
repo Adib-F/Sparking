@@ -35,16 +35,16 @@ RUN chmod -R 775 storage bootstrap/cache
 
 EXPOSE 8080
 
-CMD sh -c '\
-  echo "Menunggu koneksi ke MySQL di $DB_HOST:$DB_PORT..." && \
-  while ! nc -z "$DB_HOST" "$DB_PORT"; do \
-    echo "MySQL belum siap, menunggu..." && sleep 3; \
+CMD ["sh", "-c", "\
+  echo 'Menunggu koneksi ke MySQL di $DB_HOST:$DB_PORT...' && \
+  while ! nc -z \"$DB_HOST\" \"$DB_PORT\"; do \
+    echo 'MySQL belum siap, menunggu...' && sleep 3; \
   done && \
-  echo "MySQL terkoneksi, lanjut migrasi..." && \
+  echo 'MySQL terkoneksi, lanjut migrasi...' && \
   php artisan config:clear && \
   php artisan cache:clear && \
   php artisan config:cache && \
   php artisan migrate --force && \
-  echo "Menjalankan Laravel server..." && \
-  php artisan serve --host=0.0.0.0 --port=8080'
-
+  echo 'Menjalankan Laravel server...' && \
+  php artisan serve --host=0.0.0.0 --port=8080 \
+"]
