@@ -29,14 +29,11 @@ RUN npm install && npm run build
 # Jalankan cache Laravel
 RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
 
-# Jalankan Laravel menggunakan built-in server + migrate saat container dijalankan
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000
+# Set permission folder Laravel
+RUN chmod -R 775 storage bootstrap/cache
 
 # Buka port untuk Railway
 EXPOSE 8000
 
-# Jalankan Laravel menggunakan built-in server
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
-
-# Set permission folder Laravel
-RUN chmod -R 775 storage bootstrap/cache
+# Jalankan migrate + serve
+CMD sh -c "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000"
