@@ -10,9 +10,9 @@ export default defineConfig({
     ],
     build: {
         manifest: true,
-        outDir: 'public/build', // hasil build ke sini
+        outDir: 'public/build',
         rollupOptions: {
-            input: 'resources/js/app.js', // atau sesuai entry utama kamu
-        }
-    }
+            input: 'resources/js/app.js',
+        },
+    },
 });
