@@ -30,3 +30,6 @@ EXPOSE 8000
 
 # Jalankan Laravel menggunakan built-in server
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+
+# Set permission folder Laravel
+RUN chmod -R 775 storage bootstrap/cache
