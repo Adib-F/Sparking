@@ -49,7 +49,7 @@ CMD ["sh", "-c", "\
   php artisan route:cache && \
   php artisan view:cache && \
   echo '⚙️ Re-build Vite assets...' && \
-  npm run build && \
+  npm run build && cp -r public/build /var/www/public && \
   echo '🚀 Menjalankan Laravel server...' && \
   php artisan serve --host=0.0.0.0 --port=8080 \
 "]
