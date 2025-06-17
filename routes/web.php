@@ -16,6 +16,28 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AdminSlotController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OnboardingController;
+use Illuminate\Support\Facades\DB;
+
+
+//untuk deploy
+Route::get('/test-env', function () {
+    return [
+        'app_url' => env('APP_URL'),
+        'db_host' => env('DB_HOST'),
+        'mail_user' => env('MAIL_USERNAME'),
+    ];
+});
+
+Route::get('/debug', function () {
+    try {
+        DB::connection()->getPdo();
+        return 'Database OK!';
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
+});
+
+
 
 // landing Page
 Route::get('/', [LandingPageController::class, 'index'])->name('login');
