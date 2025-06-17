@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     nodejs \
     npm \
-    netcat \
+    netcat-openbsd \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
