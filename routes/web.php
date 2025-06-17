@@ -17,6 +17,13 @@ use App\Http\Controllers\AdminSlotController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OnboardingController;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/run-migrate', function () {
+    Artisan::call('migrate', ['--force' => true]);
+    return '✅ Migrasi berhasil dijalankan!';
+});
+
 
 
 //untuk deploy

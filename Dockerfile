@@ -38,7 +38,7 @@ EXPOSE 8080
 CMD ["sh", "-c", "\
   echo 'Menunggu koneksi ke MySQL di $DB_HOST:$DB_PORT...' && \
   while ! nc -z \"$DB_HOST\" \"$DB_PORT\"; do \
-    echo 'MySQL belum siap, menunggu...' && sleep 3; \
+    echo 'MySQL belum siap, menunggu...' && sleep 10; \
   done && \
   echo 'MySQL terkoneksi, lanjut migrasi...' && \
   php artisan config:clear && \
