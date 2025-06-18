@@ -12,18 +12,23 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www
 
-# Copy project
-COPY . .
+# Copy hanya yang diperlukan untuk install dependencies dulu
+COPY composer.json composer.lock package.json vite.config.js ./
+COPY resources/ ./resources/
 
 # Install dependency PHP dan JS
-RUN composer install --no-dev --optimize-autoloader \
+RUN composer install --no-dev --optimize-autoloader --no-interaction \
     && npm install \
     && npm run build \
     && npm install -g vite
+
+# Copy seluruh project setelah dependencies terinstall
+COPY . .
 
 # Set permission
 RUN chmod -R 775 storage bootstrap/cache
