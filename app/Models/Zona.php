@@ -14,9 +14,9 @@ class Zona extends Model
 
     public function subzonas()
     {
-        return $this->hasMany(Subzona::class, 'zona_id');
+        return $this->hasMany(SubZona::class, 'zona_id');
     }
-    
+
 
     public function transaksis()
     {
