@@ -1,7 +1,6 @@
-# Gunakan base image dari Laravel Sail (PHP + Composer + Node)
 FROM laravelsail/php83-composer:latest
 
-# Install dependensi tambahan
+# Install dependency
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -15,30 +14,24 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
 
-# Direktori kerja
 WORKDIR /var/www
 
-# Copy semua file ke dalam container
+# Copy project
 COPY . .
 
-# Install dependensi PHP
-RUN composer install --no-dev --optimize-autoloader
+# Install dependency PHP dan JS
+RUN composer install --no-dev --optimize-autoloader \
+    && npm install \
+    && npm run build \
+    && npm install -g vite
 
-# Install dependensi JS
-RUN npm install
-
-# Install vite global (optional, hanya jika dibutuhkan oleh sistem build)
-RUN npm install -g vite
-
-# Set permission folder Laravel
+# Set permission
 RUN chmod -R 775 storage bootstrap/cache
 
-# Tambahkan di atas sebelum CMD
-RUN npm run build
-
+# Expose port
 EXPOSE 8080
 
-# CMD hanya menjalankan server Laravel
+# Jalankan Laravel
 CMD ["sh", "-c", "\
   echo 'Menunggu koneksi ke MySQL di $DB_HOST:$DB_PORT...' && \
   while ! nc -z \"$DB_HOST\" \"$DB_PORT\"; do \
@@ -46,7 +39,6 @@ CMD ["sh", "-c", "\
   done && \
   echo '✅ MySQL terkoneksi, lanjut migrasi...' && \
   php artisan migrate --force || { echo '❌ Migrasi gagal!'; exit 1; } && \
-  echo '✅ Migrasi selesai, lanjut cache...' && \
   php artisan config:clear && \
   php artisan cache:clear && \
   php artisan config:cache && \
@@ -55,4 +47,3 @@ CMD ["sh", "-c", "\
   echo '🚀 Menjalankan Laravel server...' && \
   php artisan serve --host=0.0.0.0 --port=8080 \
 "]
-
