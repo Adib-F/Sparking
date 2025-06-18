@@ -66,7 +66,7 @@ class ApiRealtimeController extends Controller
      */
     public function getSubzonaDetails($subzonaId)
     {
-        $subzona = Subzona::with(['slots' => function($query) {
+        $subzona = SubZona::with(['slots' => function($query) {
             $query->orderBy('nomor_slot');
         }])->findOrFail($subzonaId);
 
@@ -110,7 +110,7 @@ class ApiRealtimeController extends Controller
     public function getZonaBySubzona($id)
     {
         try {
-            $subzona = Subzona::with('zona')->findOrFail($id);
+            $subzona = SubZona::with('zona')->findOrFail($id);
 
             return response()->json([
                 'success' => true,
@@ -161,7 +161,7 @@ class ApiRealtimeController extends Controller
      */
     public function getCameraIdBySubzona($subzonaId)
     {
-        $subzona = Subzona::find($subzonaId);
+        $subzona = SubZona::find($subzonaId);
 
         if ($subzona && $subzona->camera_id !== null) {
             return response()->json(['camera_id' => $subzona->camera_id]);
@@ -172,7 +172,7 @@ class ApiRealtimeController extends Controller
 
     public function getCamera($id)
 {
-    $subzona = Subzona::find($id);
+    $subzona = SubZona::find($id);
 
     if (!$subzona) {
         return response()->json(['error' => 'Subzona tidak ditemukan'], 404);
