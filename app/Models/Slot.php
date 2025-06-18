@@ -13,6 +13,6 @@ class Slot extends Model
 
     public function subzona()
     {
-        return $this->belongsTo(Subzona::class, 'subzona_id');
+        return $this->belongsTo(SubZona::class, 'subzona_id');
     }
 }

@@ -23,6 +23,6 @@ class LogParkir extends Model
 
     public function subzona()
     {
-        return $this->belongsTo(Subzona::class);
+        return $this->belongsTo(SubZona::class);
     }
 }

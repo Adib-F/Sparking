@@ -17,7 +17,7 @@ class AdminZonaController extends Controller
         $zonaId = $request->get('zona_id') ?? null;
 
         // Filter subzona berdasarkan zona_id jika ada
-        $subzonas = $zonaId ? Subzona::with('zona')->where('zona_id', $zonaId)->get() : collect([]);
+        $subzonas = $zonaId ? SubZona::with('zona')->where('zona_id', $zonaId)->get() : collect([]);
 
         return view('admin.manageZona', compact('zonas', 'subzonas', 'zonaId'), [
             "title" => "ManageZona",
@@ -115,13 +115,13 @@ class AdminZonaController extends Controller
             $validated['foto'] = $request->file('foto')->store('datafoto', 'public');
         }
 
-        Subzona::create($validated);
+        SubZona::create($validated);
         return redirect()->back()->with('succes', 'Subzona berhasil ditambahkan.');
     }
 
     public function updateSubzona(Request $request, $id)
     {
-        $subzona = Subzona::findOrFail($id);
+        $subzona = SubZona::findOrFail($id);
 
         $validated = $request->validate([
             'foto' => 'image|max:5000',
