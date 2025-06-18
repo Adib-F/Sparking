@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Subzona;
+use App\Models\SubZona;
 use App\Models\Zona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;

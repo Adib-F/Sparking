@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 use App\Models\Zona;
-use App\Models\Subzona;
+use App\Models\SubZona;
 use App\Models\Slot;
 use Illuminate\Http\Request;
 
@@ -19,7 +19,7 @@ class AdminSlotController extends Controller
         $selectedZona = $zonaId ? Zona::findOrFail($zonaId) : $zonas->first();
 
         // Subzona berdasarkan zona yang dipilih
-        $subzonas = $selectedZona ? Subzona::where('zona_id', $selectedZona->id)->get() : collect();
+        $subzonas = $selectedZona ? SubZona::where('zona_id', $selectedZona->id)->get() : collect();
 
         // Subzona pertama sebagai default
         $selectedSubzona = $subzonas->first();
@@ -40,7 +40,7 @@ class AdminSlotController extends Controller
     public function getSlotsBySubzona($subzonaId)
     {
         // Ambil subzona yang dipilih
-        $subzona = Subzona::findOrFail($subzonaId);
+        $subzona = SubZona::findOrFail($subzonaId);
 
         // Ambil zona dari subzona
         $zona = $subzona->zona;
@@ -49,7 +49,7 @@ class AdminSlotController extends Controller
         $zonas = Zona::all();
 
         // Ambil semua subzona untuk zona yang dipilih
-        $subzonas = Subzona::where('zona_id', $zona->id)->get();
+        $subzonas = SubZona::where('zona_id', $zona->id)->get();
 
         // Ambil slot untuk subzona yang dipilih
         $slots = Slot::where('subzona_id', $subzonaId)->get();

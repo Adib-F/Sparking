@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\LogParkir;
-use App\Models\Subzona;
+use App\Models\SubZona;
 use Carbon\Carbon;
 
 class ApiLogParkirController extends Controller
@@ -19,7 +19,7 @@ class ApiLogParkirController extends Controller
             'waktu_mulai' => 'required|date_format:Y-m-d H:i:s',
         ]);
 
-        $subzona = Subzona::find($request->subzona_id);
+        $subzona = SubZona::find($request->subzona_id);
 
         $log = LogParkir::create([
             'zona_id' => $subzona->zona_id,
