@@ -15,7 +15,7 @@ class ApiRealtimeController extends Controller
     public function getAllSubzonas()
 {
     $subzonas = SubZona::select('id', 'nama_subzona', 'camera_id')
-        ->whereNotNull('camera_id') 
+        ->whereNotNull('camera_id')
         ->get();
 
     return response()->json($subzonas);
@@ -57,7 +57,7 @@ class ApiRealtimeController extends Controller
      */
     public function getSubzonas($zonaId)
     {
-        $subzonas = Subzona::where('zona_id', $zonaId)->get();
+        $subzonas = SubZona::where('zona_id', $zonaId)->get();
         return response()->json($subzonas);
     }
 
@@ -169,7 +169,7 @@ class ApiRealtimeController extends Controller
 
         return response()->json(['error' => 'Camera ID not found'], 404);
     }
-    
+
     public function getCamera($id)
 {
     $subzona = Subzona::find($id);
