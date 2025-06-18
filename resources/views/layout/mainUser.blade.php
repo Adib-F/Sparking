@@ -16,7 +16,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js"></script>
-    @vite(['resources/css/app.css','resources/js/app.js'])
+    {{-- @vite(['resources/css/app.css','resources/js/app.js']) --}}
+    {{-- besok coba hapus vite yang ada resurce app.css --}}
+    @vite('resources/css/app.css')
     <link href="{{ asset('css_user/user_landing_page.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
