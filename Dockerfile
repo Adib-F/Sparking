@@ -17,18 +17,14 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /var/www
 
-# Copy hanya yang diperlukan untuk install dependencies dulu
-COPY composer.json composer.lock package.json vite.config.js ./
-COPY resources/ ./resources/
+# Copy seluruh project terlebih dahulu
+COPY . .
 
 # Install dependency PHP dan JS
 RUN composer install --no-dev --optimize-autoloader --no-interaction \
     && npm install \
     && npm run build \
     && npm install -g vite
-
-# Copy seluruh project setelah dependencies terinstall
-COPY . .
 
 # Set permission
 RUN chmod -R 775 storage bootstrap/cache
