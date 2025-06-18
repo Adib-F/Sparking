@@ -33,8 +33,12 @@ RUN npm install -g vite
 # Set permission folder Laravel
 RUN chmod -R 775 storage bootstrap/cache
 
+# Tambahkan di atas sebelum CMD
+RUN npm run build
+
 EXPOSE 8080
 
+# CMD hanya menjalankan server Laravel
 CMD ["sh", "-c", "\
   echo 'Menunggu koneksi ke MySQL di $DB_HOST:$DB_PORT...' && \
   while ! nc -z \"$DB_HOST\" \"$DB_PORT\"; do \
@@ -48,8 +52,6 @@ CMD ["sh", "-c", "\
   php artisan config:cache && \
   php artisan route:cache && \
   php artisan view:cache && \
-  echo '⚙️ Re-build Vite assets...' && \
-  npm run build && \
   echo '🚀 Menjalankan Laravel server...' && \
   php artisan serve --host=0.0.0.0 --port=8080 \
 "]
