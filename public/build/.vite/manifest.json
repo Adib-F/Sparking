@@ -4,6 +4,11 @@
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/css/sidebar.css": {
+    "file": "assets/sidebar-DRzjdOBI.css",
+    "src": "resources/css/sidebar.css",
+    "isEntry": true
+  },
   "resources/js/app.js": {
     "file": "assets/app-C8oBGabl.js",
     "name": "app",
@@ -12,5 +17,11 @@
     "css": [
       "assets/app-DNjBzx93.css"
     ]
+  },
+  "resources/js/sidebar.js": {
+    "file": "assets/sidebar-D7Mo2k1G.js",
+    "name": "sidebar",
+    "src": "resources/js/sidebar.js",
+    "isEntry": true
   }
 }

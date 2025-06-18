@@ -15,10 +15,8 @@
     <link rel="stylesheet" href="./node_modules/apexcharts/dist/apexcharts.css">
     @vite('resources/css/app.css')
     @vite('resources/css/sidebar.css')
-    @vite('resources/css/loader.css')
     @vite('resources/js/app.js')
     @vite('resources/js/sidebar.js')
-    @vite('resources/js/loader.js')
 </head>
 
 <body class="font-poppins  [&::-webkit-scrollbar]:w-3
