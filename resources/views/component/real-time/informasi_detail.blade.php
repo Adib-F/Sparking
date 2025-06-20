@@ -129,7 +129,7 @@
 
         init() {
             const timestamp = Date.now();
-            this.streamUrl = `http://127.0.0.1:5000/clean_video_feed?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
+            this.streamUrl = `https://3522-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
             console.log("Starting clean stream:", this.streamUrl);
 
             const videoElement = document.getElementById(this.elementId);
