@@ -24,7 +24,8 @@ Route::get('/proxy-stream', function (\Illuminate\Http\Request $request) {
     $subzonaId = $request->query('subzona_id');
 
     // GUNAKAN URL ngrok kamu
-    $flaskUrl = "https://3522-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id={$cameraId}&subzona_id={$subzonaId}";
+    $flaskUrl = "https://990d-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id={$cameraId}&subzona_id={$subzonaId}";
+
 
     $response = Http::withHeaders([
         'Accept' => 'multipart/x-mixed-replace; boundary=frame'
