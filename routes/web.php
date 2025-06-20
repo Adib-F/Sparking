@@ -16,32 +16,25 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AdminSlotController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OnboardingController;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Response;
 
-Route::get('/run-migrate', function () {
-    Artisan::call('migrate', ['--force' => true]);
-    return '✅ Migrasi berhasil dijalankan!';
-});
+Route::get('/proxy-stream', function (\Illuminate\Http\Request $request) {
+    $cameraId = $request->query('camera_id');
+    $subzonaId = $request->query('subzona_id');
 
+    // GUNAKAN URL ngrok kamu
+    $flaskUrl = "https://3522-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id={$cameraId}&subzona_id={$subzonaId}";
 
+    $response = Http::withHeaders([
+        'Accept' => 'multipart/x-mixed-replace; boundary=frame'
+    ])->get($flaskUrl);
 
-//untuk deploy
-Route::get('/test-env', function () {
-    return [
-        'app_url' => env('APP_URL'),
-        'db_host' => env('DB_HOST'),
-        'mail_user' => env('MAIL_USERNAME'),
-    ];
-});
-
-Route::get('/debug', function () {
-    try {
-        DB::connection()->getPdo();
-        return 'Database OK!';
-    } catch (\Exception $e) {
-        return $e->getMessage();
-    }
+    return Response::stream(function () use ($response) {
+        echo $response->body();
+    }, 200, [
+        'Content-Type' => 'multipart/x-mixed-replace; boundary=frame'
+    ]);
 });
 
 

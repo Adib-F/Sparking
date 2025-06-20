@@ -129,7 +129,8 @@
 
         init() {
             const timestamp = Date.now();
-            this.streamUrl = `https://3522-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
+            //tinggal sesuaikan domain dari ngrok
+            this.streamUrl = `/proxy-stream?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
             console.log("Starting clean stream:", this.streamUrl);
 
             const videoElement = document.getElementById(this.elementId);
