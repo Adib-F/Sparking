@@ -17,19 +17,25 @@ use App\Http\Controllers\AdminSlotController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OnboardingController;
 
-Route::get('/proxy-stream', function (\Illuminate\Http\Request $request) {
+use Illuminate\Support\Facades\Response;
+use Illuminate\Http\Request;
+
+Route::get('/proxy-stream', function (Request $request) {
     $cameraId = $request->query('camera_id');
     $subzonaId = $request->query('subzona_id');
     $flaskUrl = "https://28ef-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id={$cameraId}&subzona_id={$subzonaId}";
 
     return response()->stream(function () use ($flaskUrl) {
+        // 🧠 Penting: bersihkan output buffer
+        while (ob_get_level() > 0) ob_end_clean();
+        ob_implicit_flush(true);
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $flaskUrl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_WRITEFUNCTION, function ($ch, $data) {
             echo $data;
-            flush();
+            flush(); // Kirim ke browser
             return strlen($data);
         });
         curl_exec($ch);
@@ -40,6 +46,7 @@ Route::get('/proxy-stream', function (\Illuminate\Http\Request $request) {
         'Connection' => 'keep-alive',
     ]);
 });
+
 
 
 
