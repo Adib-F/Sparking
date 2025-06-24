@@ -18,36 +18,31 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OnboardingController;
 
 use Illuminate\Support\Facades\Response;
+// use Illuminate\Http\Request;
+
 use Illuminate\Http\Request;
 
-// Route::get('/proxy-stream', function (Request $request) {
-//     set_time_limit(0);
+Route::get('/proxy-stream', function (Request $request) {
+    set_time_limit(1);
 
-//     $cameraId = $request->query('camera_id');
-//     $subzonaId = $request->query('subzona_id');
-//     $flaskUrl = "https://93b6-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id={$cameraId}&subzona_id={$subzonaId}";
+    $cameraId = $request->query('camera_id');
+    $subzonaId = $request->query('subzona_id');
+    $flaskUrl = "https://93b6-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id={$cameraId}&subzona_id={$subzonaId}";
 
-//     return response()->stream(function () use ($flaskUrl) {
-//         // 🧠 Penting: bersihkan output buffer
-//         while (ob_get_level() > 0) ob_end_clean();
-//         ob_implicit_flush(true);
+    $stream = fopen($flaskUrl, 'rb');
 
-//         $ch = curl_init();
-//         curl_setopt($ch, CURLOPT_URL, $flaskUrl);
-//         curl_setopt($ch, CURLOPT_HEADER, false);
-//         curl_setopt($ch, CURLOPT_WRITEFUNCTION, function ($ch, $data) {
-//             echo $data;
-//             flush(); // Kirim ke browser
-//             return strlen($data);
-//         });
-//         curl_exec($ch);
-//         curl_close($ch);
-//     }, 200, [
-//         'Content-Type' => 'multipart/x-mixed-replace; boundary=frame',
-//         'Cache-Control' => 'no-cache',
-//         'Connection' => 'keep-alive',
-//     ]);
-// });
+    return response()->stream(function () use ($stream) {
+        while (!feof($stream)) {
+            echo fread($stream, 2048);
+            flush();
+        }
+        fclose($stream);
+    }, 200, [
+        'Content-Type' => 'multipart/x-mixed-replace; boundary=frame',
+        'Cache-Control' => 'no-cache',
+        'Connection' => 'keep-alive',
+    ]);
+});
 
 
 
