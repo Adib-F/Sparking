@@ -19,7 +19,7 @@
                 <h3 class="mb-4 text-2xl font-bold" id="subzoneName">Sub Zona: Memuat...</h3>
 
                 <div class="mb-6 overflow-hidden rounded-lg shadow-md">
-                    <img src="/proxy-stream?camera_id=0&subzona_id=1" alt="Live Stream" width="640" height="480">
+                    <img id="subzoneStream" class="object-cover w-full h-auto max-h-[85vh] rounded-lg shadow-md" src="" alt="Stream Kamera Subzona">
                 </div>
 
                 <div>
