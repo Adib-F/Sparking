@@ -20,7 +20,7 @@ use App\Http\Controllers\OnboardingController;
 Route::get('/proxy-stream', function (\Illuminate\Http\Request $request) {
     $cameraId = $request->query('camera_id');
     $subzonaId = $request->query('subzona_id');
-    $flaskUrl = "https://d579-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id={$cameraId}&subzona_id={$subzonaId}";
+    $flaskUrl = "https://28ef-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id={$cameraId}&subzona_id={$subzonaId}";
 
     return response()->stream(function () use ($flaskUrl) {
         $ch = curl_init();
