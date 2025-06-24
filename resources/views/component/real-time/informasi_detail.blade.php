@@ -131,7 +131,7 @@
             const timestamp = Date.now();
             //tinggal sesuaikan domain dari ngrok
             // this.streamUrl = `/proxy-stream?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
-            this.streamUrl = `https://93b6-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
+            this.streamUrl = `https://contrary-jones-scripts-celtic.trycloudflare.com/clean_video_feed?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
 
 
             console.log("Starting clean stream:", this.streamUrl);
