@@ -20,32 +20,34 @@ use App\Http\Controllers\OnboardingController;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 
-Route::get('/proxy-stream', function (Request $request) {
-    $cameraId = $request->query('camera_id');
-    $subzonaId = $request->query('subzona_id');
-    $flaskUrl = "https://28ef-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id={$cameraId}&subzona_id={$subzonaId}";
+// Route::get('/proxy-stream', function (Request $request) {
+//     set_time_limit(0);
 
-    return response()->stream(function () use ($flaskUrl) {
-        // 🧠 Penting: bersihkan output buffer
-        while (ob_get_level() > 0) ob_end_clean();
-        ob_implicit_flush(true);
+//     $cameraId = $request->query('camera_id');
+//     $subzonaId = $request->query('subzona_id');
+//     $flaskUrl = "https://93b6-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id={$cameraId}&subzona_id={$subzonaId}";
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $flaskUrl);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_WRITEFUNCTION, function ($ch, $data) {
-            echo $data;
-            flush(); // Kirim ke browser
-            return strlen($data);
-        });
-        curl_exec($ch);
-        curl_close($ch);
-    }, 200, [
-        'Content-Type' => 'multipart/x-mixed-replace; boundary=frame',
-        'Cache-Control' => 'no-cache',
-        'Connection' => 'keep-alive',
-    ]);
-});
+//     return response()->stream(function () use ($flaskUrl) {
+//         // 🧠 Penting: bersihkan output buffer
+//         while (ob_get_level() > 0) ob_end_clean();
+//         ob_implicit_flush(true);
+
+//         $ch = curl_init();
+//         curl_setopt($ch, CURLOPT_URL, $flaskUrl);
+//         curl_setopt($ch, CURLOPT_HEADER, false);
+//         curl_setopt($ch, CURLOPT_WRITEFUNCTION, function ($ch, $data) {
+//             echo $data;
+//             flush(); // Kirim ke browser
+//             return strlen($data);
+//         });
+//         curl_exec($ch);
+//         curl_close($ch);
+//     }, 200, [
+//         'Content-Type' => 'multipart/x-mixed-replace; boundary=frame',
+//         'Cache-Control' => 'no-cache',
+//         'Connection' => 'keep-alive',
+//     ]);
+// });
 
 
 

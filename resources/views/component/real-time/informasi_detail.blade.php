@@ -124,26 +124,18 @@
             this.cameraId = cameraId;
             this.elementId = elementId;
             this.subzonaId = subzonaId;
+            this.streamUrl = `https://93b6-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id=${cameraId}&subzona_id=${subzonaId}`;
             this.init();
         }
 
         init() {
-            const timestamp = Date.now();
-            //tinggal sesuaikan domain dari ngrok
-            this.streamUrl = `/proxy-stream?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
-            console.log("Starting clean stream:", this.streamUrl);
-
             const videoElement = document.getElementById(this.elementId);
             videoElement.src = this.streamUrl;
 
+            // Tidak ada retry loop karena MJPEG stream bisa error jika disambung ulang terlalu cepat
             videoElement.onerror = () => {
-                console.error("Stream error, retrying...");
-                this.retry();
+                console.error("Stream error. Tidak dapat menyambung ke server Flask.");
             };
-        }
-
-        retry() {
-            setTimeout(() => this.init(), 3000);
         }
 
         stop() {
@@ -152,6 +144,7 @@
             console.log("Stream stopped");
         }
     }
+
 
     document.addEventListener('DOMContentLoaded', () => {
         const zonaSelect = document.getElementById('zona-select');
@@ -241,7 +234,7 @@
             updateSlotStats(data.slotStats);
             document.getElementById('subzoneName').textContent = `Sub Zona: ${data.nama_subzona}`;
 
-            if (Number.isInteger(data.camera_id)) {
+            if (typeof data.camera_id !== 'undefined' && data.camera_id !== null) {
                 if (videoStreamInstance) videoStreamInstance.stop();
                 videoStreamInstance = new VideoStream(data.camera_id, 'subzoneStream', subzonaId);
             } else {
