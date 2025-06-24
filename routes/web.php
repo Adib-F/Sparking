@@ -17,34 +17,39 @@ use App\Http\Controllers\AdminSlotController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OnboardingController;
 
-use Illuminate\Support\Facades\Response;
-// use Illuminate\Http\Request;
+
 
 use Illuminate\Http\Request;
 
 Route::get('/proxy-stream', function (Request $request) {
-    set_time_limit(1);
-
     $cameraId = $request->query('camera_id');
     $subzonaId = $request->query('subzona_id');
     $flaskUrl = "https://93b6-103-164-80-99.ngrok-free.app/clean_video_feed?camera_id={$cameraId}&subzona_id={$subzonaId}";
 
+    header('Content-Type: multipart/x-mixed-replace; boundary=frame');
+    header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+    header('Pragma: no-cache');
+    header('Connection: keep-alive');
+    header('X-Accel-Buffering: no');
+
     $stream = fopen($flaskUrl, 'rb');
 
-    return response()->stream(function () use ($stream) {
-        while (!feof($stream)) {
-            echo fread($stream, 2048);
-            flush();
-        }
-        fclose($stream);
-    }, 200, [
-        'Content-Type' => 'multipart/x-mixed-replace; boundary=frame',
-        'Cache-Control' => 'no-cache',
-        'Connection' => 'keep-alive',
-    ]);
+    if (!$stream) {
+        http_response_code(502);
+        echo "Gagal membuka stream dari Flask.";
+        exit;
+    }
+
+    while (!feof($stream)) {
+        $chunk = fread($stream, 8192);
+        echo $chunk;
+        flush();
+        if (connection_aborted()) break;
+    }
+
+    fclose($stream);
+    exit;
 });
-
-
 
 
 
