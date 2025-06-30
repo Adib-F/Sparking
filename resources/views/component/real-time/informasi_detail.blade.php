@@ -129,13 +129,8 @@
 
         init() {
             const timestamp = Date.now();
-            //tinggal sesuaikan domain dari ngrok
-            // this.streamUrl = `/proxy-stream?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
-            this.streamUrl = `https://contrary-jones-scripts-celtic.trycloudflare.com/clean_video_feed?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
-
-
+            this.streamUrl = `https://forget-involves-boost-bolivia.trycloudflare.com/clean_video_feed?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
             console.log("Starting clean stream:", this.streamUrl);
-
             const videoElement = document.getElementById(this.elementId);
             videoElement.src = this.streamUrl;
 
