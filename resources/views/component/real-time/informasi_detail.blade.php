@@ -129,7 +129,7 @@
 
         init() {
             const timestamp = Date.now();
-            this.streamUrl = `https://ride-cycles-edwards-matches.trycloudflare.com/clean_video_feed?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
+            this.streamUrl = `https://rw-dirt-again-wine.trycloudflare.comclean_video_feed?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
             console.log("Starting clean stream:", this.streamUrl);
             const videoElement = document.getElementById(this.elementId);
             videoElement.src = this.streamUrl;
