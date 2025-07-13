@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SubZona;
 use Illuminate\Http\Request;
-use App\Models\Slot; // pastikan model Slot ada dan sudah di-import
+use App\Models\Slot;
 
 class PublicSlotController extends Controller
 {
@@ -16,7 +16,7 @@ class PublicSlotController extends Controller
 
     public function getData()
 {
-    $subzone = SubZona::first(); // Ambil subzona default
+    $subzone = SubZona::first(); 
 
     $slots = Slot::where('id_subzona', $subzone->id)->get();
 

@@ -2,8 +2,10 @@
 <nav class="sticky top-0 z-50 shadow-lg bg-biru_tua font-poppins">
     <div class="flex items-center justify-between px-4 py-4 mx-auto max-w-7xl">
         <!-- Logo -->
-        <img src="images/icon.png"
-            class="object-cover w-12 h-12" />
+        <div class="flex items-center text-white">
+            <img src="{{ asset('images/icon.png') }}" alt="Logo" class="w-12 h-12">
+            <h1 class="pt-1 text-2xl font-bold ">PARKING</h1>
+        </div>
 
 
 
