@@ -16,6 +16,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AdminSlotController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OnboardingController;
+use App\Http\Controllers\PublicSlotController;
 
 // landing Page
 Route::get('/', [LandingPageController::class, 'index'])->name('login');
@@ -24,6 +25,10 @@ Route::get('/', [LandingPageController::class, 'index'])->name('login');
 Route::post('/login-proses', [AuthController::class, 'login_proses'])->name('login_proses');
 Route::post('/registrasi-proses', [AuthController::class, 'registrasi_proses'])->name('registrasi_proses');
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->name('verification.verify');
+
+Route::get('/realtime-public', [PublicSlotController::class, 'index'])->name('realtime-public');
+Route::get('/realtime-public/data', [PublicSlotController::class, 'getData'])->name('public.realtime.data');
+
 
 //logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

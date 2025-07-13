@@ -20,6 +20,7 @@
         <div class="hidden md:flex md:items-center md:space-x-6">
             <a href="#tentang" class="text-white transition hover:text-blue-400">Tentang</a>
             <a href="#keunggulan" class="text-white transition hover:text-blue-400">Keunggulan</a>
+            <a href="{{ route('realtime-public') }}" class="text-white transition hover:text-blue-400">Real-time</a>
             <a href="javascript:void(0);" onclick="openModal()"
                 class="px-6 py-2 font-semibold text-white transition duration-300 rounded-full shadow bg-biru_muda hover:bg-white hover:text-biru_muda">
                 Login
