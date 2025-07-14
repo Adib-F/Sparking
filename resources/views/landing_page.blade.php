@@ -10,7 +10,7 @@
         <div class="absolute inset-0 z-10 bg-gradient-to-b from-black/70 via-black/60 to-black/40"></div>
 
         <!-- Hero Content -->
-        <div class="absolute inset-0 z-20 flex flex-col items-center justify-center px-4 text-center text-white">
+        <div class="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center text-white">
             <h5 class="mb-2 text-3xl font-bold md:text-5xl font-poppins drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
                 SELAMAT DATANG DI HALAMAN WEB
             </h5>
