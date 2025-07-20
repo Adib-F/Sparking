@@ -1,10 +1,15 @@
-# SIPPP | Data driven smart parking system powered by IoT and Big Data Analytics
+# SPARKING | ParkirCerdasBatam: Analysis parkir dan kondisi kepadatan jalan menggunakan AI dan IoT
 
 ## Description
 
-Parkwell" adalah sistem parkir pintar berbasis website yang menggunakan teknologi IoT. Sistem ini memanfaatkan data secara real-time untuk memberikan solusi parkir yang lebih cerdas, mengurangi waktu yang diperlukan untuk mencari tempat parkir. Sistem ini dirancang untuk parkir off-street baik bagi motor dan mobil, sehingga memungkinkan pengaturan parkir yang lebih terstruktur. 
+Sparking is a smart web-based system that utilizes Internet of Things (IoT) and Artificial Intelligence (AI) technologies. This system was developed in response to a common issue experienced in certain conditions around the Politeknik Negeri Batam area—the difficulty of finding available parking spaces. During peak hours or busy events, drivers often struggle to locate open parking spots, leading to wasted time, congestion, and frustration. Sparking aims to solve this problem by providing a smarter, more efficient way to manage and monitor parking availability in real time.
 
-   ![Poster](https://pbl.polibatam.ac.id/apps/image.php?file=dXBsb2Fkcy9wYmwvMzAwMC8zMDAwX1BPU1RFUi1QQkxfMjAyNTAxMDUucG5n)
+The system has 2 actors, namely user and admin. The system has 2 main features, namely real-time monitoring of slot availability and data analysis of parking area usage.
+The development of Sparking is a continuation of the previous project, SIPPP. In the previous project, features such as registration, login, logout, vehicle monitoring, and password management were developed. While Sparking focuses on improving the features of registration, login, parking slot monitoring, and data analysis.
+
+> 💻 **Live Demo**: [https://sparking-polibatam.up.railway.app/](https://sparking-polibatam.up.railway.app/)
+
+   ![Poster](https://pbl.polibatam.ac.id/apps/image.php?file=dXBsb2Fkcy9wYmwvMzkwNC8zOTA0X1BPU1RFUi1QQkxfMjAyNTA3MTUucG5n)
 
 ---
 
