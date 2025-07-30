@@ -129,7 +129,7 @@
 
         init() {
             const timestamp = Date.now();
-            this.streamUrl = `https://pcs-selecting-sad-heating.trycloudflare.com/clean_video_feed?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
+            this.streamUrl = `https://distance-highly-funky-biography.trycloudflare.com/clean_video_feed?camera_id=${this.cameraId}&subzona_id=${this.subzonaId}`;
             console.log("Starting clean stream:", this.streamUrl);
             const videoElement = document.getElementById(this.elementId);
             videoElement.src = this.streamUrl;
