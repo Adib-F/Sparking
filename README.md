@@ -18,11 +18,11 @@ Project Manager:
 Miratul Khusna Mufida, S.ST, M.Sc 
 
 Leader:  
-3312301007 - Muhammad Adib Fakhri Siregar
+3312301097 - Muhammad Adib Fakhri Siregar
 
 Member:  
 3312301025 – Nayla Nabillah Arishima  
-3312301046 – Meizua Muhsana 
+3312301046 – Meizua Muhsana  
 3312311133 - Grey Ari Daniel Simatupang 
 
 ---
